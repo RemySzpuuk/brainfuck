@@ -1,0 +1,1 @@
+gcc bf.c -o bf.exe
