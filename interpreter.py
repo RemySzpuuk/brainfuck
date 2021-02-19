@@ -1,9 +1,17 @@
-def process(code: str):
+
+class flag(object):
+    debug = False
+
+def process(code: str, *args):
     code_cells = list(code)
     cell_ptr, code_ptr = 0, 0
     cells: list = [0]
     loop = False
     loop_start: int = 0
+    _file = open("output.txt",'a')
+    for element in args:
+        if element == "--debug":
+            flag.debug = True
 
     while code_ptr < len(code_cells):
         char = code_cells[code_ptr]
@@ -26,7 +34,7 @@ def process(code: str):
                 cell_ptr = 0
 
         if char == '.':
-            print(cells[cell_ptr])
+            f.write(cells[cell_ptr])
 
         if char == ',':
             cells[cell_ptr] = input()
@@ -45,11 +53,9 @@ def process(code: str):
             else:
                 print("Loop end")
 
-        if char == 'b':
-            break
 
-        # DEBUG: print(f"Cell: {cells}\t ptr: {cell_ptr}    code: {char}  ptr: {code_ptr}")
         code_ptr += 1
+    f.close()
 
 
 process(input("::"))
