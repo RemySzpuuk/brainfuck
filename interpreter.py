@@ -1,7 +1,4 @@
 
-class flag(object):
-    debug = False
-
 def process(code: str, *args):
     code_cells = list(code)
     cell_ptr, code_ptr = 0, 0
