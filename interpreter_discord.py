@@ -1,18 +1,19 @@
 import discord 
 from threading import Thread
 
-"""
-TODO
-Multi-thread interpreter:
-- Input time-out 
-- Loop time-out
-- Loop thread
-- process() thread
-"""
+def run_in_thread(function, *args **kwargs):
+    def magic(function):
+        t = Thread(
+            target=function(),
+            args=args
+            kwargs=kwargs
+        )
+        t.daemon = True
+        t.start()
+        return t
+    return magic
 
-#class flag(object):
-#    debug = False
-
+@run_in_thread()
 async def process(ctx: discord.Context code: str, *args):
     """
     Interpretes brainfuck code
@@ -24,9 +25,6 @@ async def process(ctx: discord.Context code: str, *args):
     loop_start: int = 0
     loop_count: int = 0
     _file = open("output.txt",'a')
-    #for element in args:
-    #    if element == "--debug":
-    #        flag.debug = True
 
     while code_ptr < len(code_cells):
         char = code_cells[code_ptr]
@@ -76,11 +74,11 @@ async def process(ctx: discord.Context code: str, *args):
     f.close()
 
 
-def output() {
+def output():
     with open("output.txt", 'r') as f:
         output = f.read()
     return output
-}
+
 
 
 process(input("::"))
