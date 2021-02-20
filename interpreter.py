@@ -6,9 +6,9 @@ def process(code: str, *args):
     loop = False
     loop_start: int = 0
     _file = open("output.txt",'a')
-    for element in args:
-        if element == "--debug":
-            flag.debug = True
+    #for element in args:
+    #    if element == "--debug":
+    #        flag.debug = True
 
     while code_ptr < len(code_cells):
         char = code_cells[code_ptr]
@@ -55,4 +55,3 @@ def process(code: str, *args):
     f.close()
 
 
-process(input("::"))
